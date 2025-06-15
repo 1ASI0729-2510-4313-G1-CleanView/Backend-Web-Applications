@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.cleanview.backend.tips.domain.model.aggregates.Action;
+import pe.upc.cleanview.backend.tips.domain.model.commands.DeleteActionCommand;
+import pe.upc.cleanview.backend.tips.domain.model.queries.GetActionsByTypeQuery;
 import pe.upc.cleanview.backend.tips.domain.model.queries.GetAllActionsQuery;
 import pe.upc.cleanview.backend.tips.domain.services.ActionCommandService;
 import pe.upc.cleanview.backend.tips.domain.services.ActionQueryService;
@@ -52,5 +54,20 @@ public class ActionController {
         return ResponseEntity.ok(resources);
     }
 
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<ActionResource>> getActionsByType(@PathVariable String type) {
+        var actions = actionQueryService.handle(new GetActionsByTypeQuery(type));
+        var resources = actions.stream()
+                .map(ActionResourceFromEntityAssembler::toResourceFromEntity)
+                .toList();
+        return ResponseEntity.ok(resources);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAction(@PathVariable Long id){
+        actionCommandService.handle(new DeleteActionCommand(id));
+        return ResponseEntity.ok().build();
+    }
 
 }

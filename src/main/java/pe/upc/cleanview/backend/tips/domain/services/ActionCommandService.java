@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface ActionCommandService {
     Optional<Action> handle(CreateActionCommand command);
 
+    void handle(DeleteActionCommand command);
 }

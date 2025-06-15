@@ -3,6 +3,7 @@ package pe.upc.cleanview.backend.tips.application.internal.commandservices;
 import org.springframework.stereotype.Service;
 import pe.upc.cleanview.backend.tips.domain.model.aggregates.Action;
 import pe.upc.cleanview.backend.tips.domain.model.commands.CreateActionCommand;
+import pe.upc.cleanview.backend.tips.domain.model.commands.DeleteActionCommand;
 import pe.upc.cleanview.backend.tips.domain.services.ActionCommandService;
 import pe.upc.cleanview.backend.tips.infraestructura.persistence.jpa.repositories.ActionRepository;
 
@@ -22,5 +23,10 @@ public class ActionCommandServiceImpl implements ActionCommandService {
         var action = new Action(command);
         actionRepository.save(action);
         return Optional.of(action);
+    }
+
+    @Override
+    public void handle(DeleteActionCommand command) {
+        actionRepository.deleteById(command.id());
     }
 }

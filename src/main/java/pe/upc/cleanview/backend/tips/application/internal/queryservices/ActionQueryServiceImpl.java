@@ -2,7 +2,9 @@ package pe.upc.cleanview.backend.tips.application.internal.queryservices;
 
 import org.springframework.stereotype.Service;
 import pe.upc.cleanview.backend.tips.domain.model.aggregates.Action;
+import pe.upc.cleanview.backend.tips.domain.model.queries.GetActionsByTypeQuery;
 import pe.upc.cleanview.backend.tips.domain.model.queries.GetAllActionsQuery;
+import pe.upc.cleanview.backend.tips.domain.model.valueobjects.ActionType;
 import pe.upc.cleanview.backend.tips.domain.services.ActionQueryService;
 import pe.upc.cleanview.backend.tips.infraestructura.persistence.jpa.repositories.ActionRepository;
 
@@ -22,4 +24,10 @@ public class ActionQueryServiceImpl implements ActionQueryService {
     public List<Action> handle(GetAllActionsQuery query){
         return actionRepository.findAll();
     }
+
+    @Override
+    public List<Action>  handle(GetActionsByTypeQuery query){
+        return actionRepository.findByActionType(ActionType.fromString(query.type()));
+    }
+
 }
