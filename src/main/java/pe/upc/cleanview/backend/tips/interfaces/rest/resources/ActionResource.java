@@ -1,0 +1,10 @@
+package pe.upc.cleanview.backend.tips.interfaces.rest.resources;
+
+public record ActionResource(
+        Long id,
+        String title,
+        String description,
+        String type,
+        boolean favorite
+) {
+}
