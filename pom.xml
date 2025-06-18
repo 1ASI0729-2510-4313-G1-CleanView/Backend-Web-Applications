@@ -69,7 +69,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-                <!-- application.properties ya no está excluido -->
+                <excludes>
+                    <exclude>application.properties</exclude>
+                </excludes>
             </resource>
         </resources>
 
