@@ -15,7 +15,7 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
 # Copia el jar compilado desde la etapa de build
-COPY --from=build /app/target/cleanview-backend-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/platform-0.0.1-SNAPSHOT.jar app.jar
 
 # Expone el puerto que usa Spring Boot
 EXPOSE 8080
