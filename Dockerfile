@@ -18,7 +18,7 @@ WORKDIR /app
 COPY --from=build /app/target/platform-0.0.1-SNAPSHOT.jar app.jar
 
 # Expone el puerto que usa Spring Boot
-EXPOSE 8080
+EXPOSE 8092
 
 # Comando para ejecutar la app
 CMD ["java", "-jar", "app.jar"]
