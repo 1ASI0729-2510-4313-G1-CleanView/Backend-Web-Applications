@@ -10,7 +10,6 @@ COPY src ./src
 # Ejecuta el build del proyecto sin tests
 RUN mvn clean package -DskipTests
 
-# Etapa 2: Imagen ligera con Java para correr el jar
 FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
