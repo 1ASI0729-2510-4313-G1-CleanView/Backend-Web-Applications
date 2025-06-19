@@ -2,15 +2,17 @@ package pe.upc.cleanview.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
 public class CleanViewPlatformApplication {
     public static void main(String[] args) {
+        // TEMPORAL: Verificar si Render está pasando las variables de entorno
+        System.out.println("DB_URL: " + System.getenv("DB_URL"));
+        System.out.println("DB_USER: " + System.getenv("DB_USER"));
+        System.out.println("DB_PASSWORD: " + System.getenv("DB_PASSWORD"));
+
         SpringApplication.run(CleanViewPlatformApplication.class, args);
     }
-
 }
