@@ -1,11 +1,11 @@
 package pe.upc.cleanview.backend.tips.domain.model.valueobjects;
 
-public enum ActionType {
+public enum SustainableActionType {
     STORAGE,
     OPERATIONAL,
     REGULATION;
     
-    public static ActionType fromString(String str) {
+    public static SustainableActionType fromString(String str) {
         return switch (str.toLowerCase()){
             case "storage" -> STORAGE;
             case "operational" -> OPERATIONAL;
