@@ -1,9 +1,8 @@
-package pe.upc.cleanview.backend.monitoring.interfaces.rest.resources;
+package com.acme.center.platform.monitoring.interfaces.rest.resources;
 
 import java.util.List;
 
 public record CreateStoreResource(
-        List<Long> sensorsId,
         String name,
         int storeNumber,
         int amountSensor,
@@ -13,7 +12,6 @@ public record CreateStoreResource(
 ) {
 
     public CreateStoreResource {
-        if (sensorsId == null || sensorsId.isEmpty()) throw new IllegalArgumentException("store_sensors_id cannot be empty");
         if (name == null || name.isBlank()) throw new IllegalArgumentException("name cannot be blank");
         if (storeNumber < 0) throw new IllegalArgumentException("store_number must be non-negative");
         if (amountSensor < 0) throw new IllegalArgumentException("amountSensor must be non-negative");

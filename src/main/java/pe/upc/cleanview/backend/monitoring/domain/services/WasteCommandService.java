@@ -1,13 +1,15 @@
-package pe.upc.cleanview.backend.monitoring.domain.services;
+package com.acme.center.platform.monitoring.domain.services;
 
-
-import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateWasteCommand;
-import pe.upc.cleanview.backend.monitoring.domain.model.entities.Waste;
+import com.acme.center.platform.monitoring.domain.model.commands.CreateWasteCommand;
+import com.acme.center.platform.monitoring.domain.model.commands.DeleteWasteCommand;
+import com.acme.center.platform.monitoring.domain.model.entities.Waste;
 
 import java.util.Optional;
 
 public interface WasteCommandService {
 
     Optional<Waste> handle(CreateWasteCommand command);
+
+    void handle(DeleteWasteCommand command);
 
 }

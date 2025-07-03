@@ -1,7 +1,7 @@
-package pe.upc.cleanview.backend.monitoring.infraestructure.persistence.jpa.repositories;
+package com.acme.center.platform.monitoring.infraestructure.persistence.jpa.repositories;
 
+import com.acme.center.platform.monitoring.domain.model.entities.Waste;
 import org.springframework.data.jpa.repository.JpaRepository;
-import pe.upc.cleanview.backend.monitoring.domain.model.entities.Waste;
 
 public interface WasteRespository extends JpaRepository<Waste, Long> {
 }

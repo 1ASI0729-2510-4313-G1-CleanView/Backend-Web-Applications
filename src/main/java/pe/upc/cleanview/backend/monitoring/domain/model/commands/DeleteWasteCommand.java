@@ -1,4 +1,4 @@
 package com.acme.center.platform.monitoring.domain.model.commands;
 
-public record DeleteSensorCommand(Long id) {
+public record DeleteWasteCommand(Long id) {
 }

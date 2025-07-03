@@ -1,4 +1,4 @@
-package pe.upc.cleanview.backend.monitoring.interfaces.acl;
+package com.acme.center.platform.monitoring.interfaces.acl;
 
 import java.util.List;
 

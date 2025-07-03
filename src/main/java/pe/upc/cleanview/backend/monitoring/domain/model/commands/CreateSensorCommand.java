@@ -1,15 +1,14 @@
-package pe.upc.cleanview.backend.monitoring.domain.model.commands;
+package com.acme.center.platform.monitoring.domain.model.commands;
 
 import java.util.Date;
 import java.util.List;
 
 public record CreateSensorCommand(
+        List<Long> wastesId,
          String serialNumber,
-         List<Long>wastesId,
          String location,
-         String status,
          int battery,
-         Date lastModified,
+         Date lastDetection,
          String units,
          String capacity,
          String currentCapacity,

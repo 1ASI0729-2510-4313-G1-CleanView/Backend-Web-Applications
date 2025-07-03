@@ -1,12 +1,12 @@
-package pe.upc.cleanview.backend.monitoring.application.internal.queryservices;
+package com.acme.center.platform.monitoring.application.internal.queryservices;
 
-
+import com.acme.center.platform.monitoring.domain.model.aggregates.Sensor;
+import com.acme.center.platform.monitoring.domain.model.queries.GetAllSensorByStoreIdQuery;
+import com.acme.center.platform.monitoring.domain.model.queries.GetAllSensorsQuery;
+import com.acme.center.platform.monitoring.domain.model.queries.GetSensorByIdQuery;
+import com.acme.center.platform.monitoring.domain.services.SensorQueryService;
+import com.acme.center.platform.monitoring.infraestructure.persistence.jpa.repositories.SensorRepository;
 import org.springframework.stereotype.Service;
-import pe.upc.cleanview.backend.monitoring.domain.model.entities.Sensor;
-import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllSensorsQuery;
-import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetSensorByIdQuery;
-import pe.upc.cleanview.backend.monitoring.domain.services.SensorQueryService;
-import pe.upc.cleanview.backend.monitoring.infraestructure.persistence.jpa.repositories.SensorRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +29,11 @@ public class SensorQueryServiceImpl implements SensorQueryService {
     @Override
     public Optional<Sensor> handle(GetSensorByIdQuery query) {
         return sensorRepository.findById(query.id());
+    }
+
+    @Override
+    public List<Sensor> handle(GetAllSensorByStoreIdQuery query) {
+        return List.of();
     }
 
 }

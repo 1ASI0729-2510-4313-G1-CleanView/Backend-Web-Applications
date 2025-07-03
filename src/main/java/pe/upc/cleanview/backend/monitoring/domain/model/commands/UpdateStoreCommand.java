@@ -1,4 +1,5 @@
-package pe.upc.cleanview.backend.monitoring.domain.model.commands;
+package com.acme.center.platform.monitoring.domain.model.commands;
+
 
 import java.util.List;
 

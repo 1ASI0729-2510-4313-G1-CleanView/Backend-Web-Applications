@@ -1,4 +1,4 @@
-package pe.upc.cleanview.backend.monitoring.interfaces.rest.resources;
+package com.acme.center.platform.monitoring.interfaces.rest.resources;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package pe.upc.cleanview.backend.monitoring.domain.model.queries;
+package com.acme.center.platform.monitoring.domain.model.queries;
 
 public record GetAllSensorsQuery() {
 }

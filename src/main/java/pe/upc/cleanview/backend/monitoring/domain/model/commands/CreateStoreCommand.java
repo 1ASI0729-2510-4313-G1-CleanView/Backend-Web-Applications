@@ -1,9 +1,8 @@
-package pe.upc.cleanview.backend.monitoring.domain.model.commands;
+package com.acme.center.platform.monitoring.domain.model.commands;
 
-import java.util.List;
+
 
 public record CreateStoreCommand(
-        List<Long> sensorsId,
         String name,
         int storeNumber,
         int amountSensor,

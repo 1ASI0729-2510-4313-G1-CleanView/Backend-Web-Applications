@@ -1,6 +1,17 @@
-package pe.upc.cleanview.backend.monitoring.interfaces.rest;
+package com.acme.center.platform.monitoring.interfaces.rest;
 
-
+import com.acme.center.platform.monitoring.domain.model.commands.DeleteStoreCommand;
+import com.acme.center.platform.monitoring.domain.model.queries.GetAllStoresQuery;
+import com.acme.center.platform.monitoring.domain.model.queries.GetStoreByIdQuery;
+import com.acme.center.platform.monitoring.domain.model.queries.GetStoreByNameQuery;
+import com.acme.center.platform.monitoring.domain.services.StoreCommandService;
+import com.acme.center.platform.monitoring.domain.services.StoreQueryService;
+import com.acme.center.platform.monitoring.interfaces.rest.resources.CreateStoreResource;
+import com.acme.center.platform.monitoring.interfaces.rest.resources.StoreResource;
+import com.acme.center.platform.monitoring.interfaces.rest.resources.UpdateStoreResource;
+import com.acme.center.platform.monitoring.interfaces.rest.transform.CreateStoreCommandFromResourceAssembler;
+import com.acme.center.platform.monitoring.interfaces.rest.transform.StoreResourceFromEntityAssembler;
+import com.acme.center.platform.monitoring.interfaces.rest.transform.UpdateStoreCommandFromResourceAssembler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -9,17 +20,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllStoresQuery;
-import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByIdQuery;
-import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByNameQuery;
-import pe.upc.cleanview.backend.monitoring.domain.services.StoreCommandService;
-import pe.upc.cleanview.backend.monitoring.domain.services.StoreQueryService;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.CreateStoreResource;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.StoreResource;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.UpdateStoreResource;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.CreateStoreCommandFromResourceAssembler;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.StoreResourceFromEntityAssembler;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.UpdateStoreCommandFromResourceAssembler;
 
 import java.util.List;
 
@@ -69,6 +69,20 @@ public class StoresController {
         var storeResource = StoreResourceFromEntityAssembler.toResourceFromEntity(updateStore);
         return new ResponseEntity<>(storeResource, HttpStatus.OK);
     }
+
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Store")
+    public ResponseEntity<StoreResource> deleteStore(@PathVariable Long id) {
+        var deleteStoreCommand = new DeleteStoreCommand(id);
+        storeCommandService.handle(deleteStoreCommand);
+        return ResponseEntity.ok().build();
+    }
+
+
+
+
+    //Queries
 
 
     @GetMapping

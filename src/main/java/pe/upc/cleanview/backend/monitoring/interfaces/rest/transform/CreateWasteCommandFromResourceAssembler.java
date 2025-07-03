@@ -1,7 +1,7 @@
-package pe.upc.cleanview.backend.monitoring.interfaces.rest.transform;
+package com.acme.center.platform.monitoring.interfaces.rest.transform;
 
-import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateWasteCommand;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.CreateWasteResource;
+import com.acme.center.platform.monitoring.domain.model.commands.CreateWasteCommand;
+import com.acme.center.platform.monitoring.interfaces.rest.resources.CreateWasteResource;
 
 public class CreateWasteCommandFromResourceAssembler {
 

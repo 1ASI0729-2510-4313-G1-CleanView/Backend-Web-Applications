@@ -1,4 +1,4 @@
-package pe.upc.cleanview.backend.monitoring.interfaces.rest.resources;
+package com.acme.center.platform.monitoring.interfaces.rest.resources;
 
 public record WasteResource(
         Long id,

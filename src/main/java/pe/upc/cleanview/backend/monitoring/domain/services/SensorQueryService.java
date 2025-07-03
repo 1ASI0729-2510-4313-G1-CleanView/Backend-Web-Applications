@@ -1,10 +1,9 @@
-package pe.upc.cleanview.backend.monitoring.domain.services;
+package com.acme.center.platform.monitoring.domain.services;
 
-
-
-import pe.upc.cleanview.backend.monitoring.domain.model.entities.Sensor;
-import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllSensorsQuery;
-import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetSensorByIdQuery;
+import com.acme.center.platform.monitoring.domain.model.aggregates.Sensor;
+import com.acme.center.platform.monitoring.domain.model.queries.GetAllSensorByStoreIdQuery;
+import com.acme.center.platform.monitoring.domain.model.queries.GetAllSensorsQuery;
+import com.acme.center.platform.monitoring.domain.model.queries.GetSensorByIdQuery;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +14,5 @@ public interface SensorQueryService {
 
     Optional<Sensor> handle(GetSensorByIdQuery query);
 
+    List<Sensor> handle(GetAllSensorByStoreIdQuery query);
 }

@@ -1,29 +1,41 @@
-package pe.upc.cleanview.backend.monitoring.application.internal.commandservices;
+package com.acme.center.platform.monitoring.application.internal.commandservices;
 
+import com.acme.center.platform.monitoring.domain.model.commands.CreateSensorCommand;
+import com.acme.center.platform.monitoring.domain.model.commands.DeleteSensorCommand;
+import com.acme.center.platform.monitoring.domain.model.commands.UpdateSensorCommand;
+import com.acme.center.platform.monitoring.domain.model.aggregates.Sensor;
+import com.acme.center.platform.monitoring.domain.model.entities.Waste;
+import com.acme.center.platform.monitoring.domain.services.SensorCommandService;
+import com.acme.center.platform.monitoring.infraestructure.persistence.jpa.repositories.SensorRepository;
+import com.acme.center.platform.monitoring.infraestructure.persistence.jpa.repositories.WasteRespository;
 import org.springframework.stereotype.Service;
-import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateSensorCommand;
-import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteSensorCommand;
-import pe.upc.cleanview.backend.monitoring.domain.model.commands.UpdateSensorCommand;
-import pe.upc.cleanview.backend.monitoring.domain.model.entities.Sensor;
-import pe.upc.cleanview.backend.monitoring.domain.services.SensorCommandService;
-import pe.upc.cleanview.backend.monitoring.infraestructure.persistence.jpa.repositories.SensorRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SensorCommandServiceImpl implements SensorCommandService {
 
-    private SensorRepository sensorRepository;
+    private final SensorRepository sensorRepository;
+    private final WasteRespository wasteRespository;
 
-    SensorCommandServiceImpl(SensorRepository sensorRepository) {
+    SensorCommandServiceImpl(SensorRepository sensorRepository,
+                             WasteRespository wasteRespository) {
         this.sensorRepository = sensorRepository;
+        this.wasteRespository = wasteRespository;
     }
 
     @Override
     public Optional<Sensor> handle(CreateSensorCommand command) {
         var sensor = new Sensor(command);
+        List<Waste> wastes = command.wastesId().stream()
+                .map(wastesId -> wasteRespository.findById(wastesId)
+                        .orElseThrow(() -> new RuntimeException("Waste not found: " + wastesId)))
+                .collect(Collectors.toList());
+        System.out.println(" -- [[  Waste found: " + wastes.stream().map(Waste::getId).toList());
+        sensor.addWastesToSensor(wastes);
         sensorRepository.save(sensor);
-
         return Optional.of(sensor);
     }
 
@@ -33,11 +45,19 @@ public class SensorCommandServiceImpl implements SensorCommandService {
         if (sensorOptional.isEmpty())
             throw new IllegalArgumentException("Sensor with id " + command.id() + " not found");
         var sensor = sensorOptional.get();
+
+        List<Waste> wastes = command.wastesId().stream()
+                .map(wastesId -> wasteRespository.findById(wastesId)
+                        .orElseThrow(() -> new RuntimeException("Waste not found: " + wastesId)))
+                .toList();
+
         sensor.Update(command);
         try {
-            var updated = sensorRepository.save(sensor);
-            return Optional.of(updated);
-        }catch (Exception e) {
+            sensorRepository.save(sensor);
+            sensor.addWastesToSensor(wastes);
+            return Optional.of(sensor);
+        }
+        catch (Exception e) {
             throw new IllegalArgumentException("Error while updating sensor with id " + command.id(), e);
         }
     }
