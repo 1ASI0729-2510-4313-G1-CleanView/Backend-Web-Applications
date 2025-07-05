@@ -1,13 +1,13 @@
-package com.acme.center.platform.monitoring.interfaces.rest;
+package pe.upc.cleanview.backend.monitoring.interfaces.rest;
 
-import com.acme.center.platform.monitoring.domain.model.commands.DeleteWasteCommand;
-import com.acme.center.platform.monitoring.domain.model.queries.GetWasteByIdQuery;
-import com.acme.center.platform.monitoring.domain.services.WasteCommandService;
-import com.acme.center.platform.monitoring.domain.services.WasteQueryService;
-import com.acme.center.platform.monitoring.interfaces.rest.resources.CreateWasteResource;
-import com.acme.center.platform.monitoring.interfaces.rest.resources.WasteResource;
-import com.acme.center.platform.monitoring.interfaces.rest.transform.CreateWasteCommandFromResourceAssembler;
-import com.acme.center.platform.monitoring.interfaces.rest.transform.WasteResourceFromEntityAssembler;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteWasteCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetWasteByIdQuery;
+import pe.upc.cleanview.backend.monitoring.domain.services.WasteCommandService;
+import pe.upc.cleanview.backend.monitoring.domain.services.WasteQueryService;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.CreateWasteResource;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.WasteResource;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.CreateWasteCommandFromResourceAssembler;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.WasteResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

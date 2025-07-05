@@ -1,11 +1,11 @@
-package com.acme.center.platform.monitoring.domain.model.aggregates;
+package pe.upc.cleanview.backend.monitoring.domain.model.aggregates;
 
-import com.acme.center.platform.monitoring.domain.model.commands.CreateSensorCommand;
-import com.acme.center.platform.monitoring.domain.model.commands.UpdateSensorCommand;
-import com.acme.center.platform.monitoring.domain.model.entities.Waste;
-import com.acme.center.platform.monitoring.domain.model.valueobjects.SensorStatus;
-import com.acme.center.platform.monitoring.domain.model.valueobjects.WasteType;
-import com.acme.center.platform.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateSensorCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.UpdateSensorCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.entities.Waste;
+import pe.upc.cleanview.backend.monitoring.domain.model.valueobjects.SensorStatus;
+import pe.upc.cleanview.backend.monitoring.domain.model.valueobjects.WasteType;
+import pe.upc.cleanview.backend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

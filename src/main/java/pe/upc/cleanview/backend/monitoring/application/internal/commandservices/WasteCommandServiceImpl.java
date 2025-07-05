@@ -1,10 +1,10 @@
-package com.acme.center.platform.monitoring.application.internal.commandservices;
+package pe.upc.cleanview.backend.monitoring.application.internal.commandservices;
 
-import com.acme.center.platform.monitoring.domain.model.commands.CreateWasteCommand;
-import com.acme.center.platform.monitoring.domain.model.commands.DeleteWasteCommand;
-import com.acme.center.platform.monitoring.domain.model.entities.Waste;
-import com.acme.center.platform.monitoring.domain.services.WasteCommandService;
-import com.acme.center.platform.monitoring.infraestructure.persistence.jpa.repositories.WasteRespository;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateWasteCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteWasteCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.entities.Waste;
+import pe.upc.cleanview.backend.monitoring.domain.services.WasteCommandService;
+import pe.upc.cleanview.backend.monitoring.infraestructure.persistence.jpa.repositories.WasteRespository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

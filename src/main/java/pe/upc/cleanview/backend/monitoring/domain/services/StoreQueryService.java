@@ -1,9 +1,9 @@
-package com.acme.center.platform.monitoring.domain.services;
+package pe.upc.cleanview.backend.monitoring.domain.services;
 
-import com.acme.center.platform.monitoring.domain.model.aggregates.Store;
-import com.acme.center.platform.monitoring.domain.model.queries.GetAllStoresQuery;
-import com.acme.center.platform.monitoring.domain.model.queries.GetStoreByIdQuery;
-import com.acme.center.platform.monitoring.domain.model.queries.GetStoreByNameQuery;
+import pe.upc.cleanview.backend.monitoring.domain.model.aggregates.Store;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllStoresQuery;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByIdQuery;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByNameQuery;
 
 import java.util.List;
 import java.util.Optional;

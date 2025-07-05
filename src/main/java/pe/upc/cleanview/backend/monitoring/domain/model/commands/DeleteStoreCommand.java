@@ -1,4 +1,4 @@
-package com.acme.center.platform.monitoring.domain.model.commands;
+package pe.upc.cleanview.backend.monitoring.domain.model.commands;
 
 public record DeleteStoreCommand(Long id) {
 }

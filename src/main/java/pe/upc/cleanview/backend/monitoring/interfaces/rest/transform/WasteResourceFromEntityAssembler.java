@@ -1,7 +1,7 @@
-package com.acme.center.platform.monitoring.interfaces.rest.transform;
+package pe.upc.cleanview.backend.monitoring.interfaces.rest.transform;
 
-import com.acme.center.platform.monitoring.domain.model.entities.Waste;
-import com.acme.center.platform.monitoring.interfaces.rest.resources.WasteResource;
+import pe.upc.cleanview.backend.monitoring.domain.model.entities.Waste;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.WasteResource;
 
 public class WasteResourceFromEntityAssembler {
 

@@ -1,8 +1,8 @@
-package com.acme.center.platform.monitoring.interfaces.rest.transform;
+package pe.upc.cleanview.backend.monitoring.interfaces.rest.transform;
 
-import com.acme.center.platform.monitoring.domain.model.aggregates.Sensor;
-import com.acme.center.platform.monitoring.domain.model.entities.Waste;
-import com.acme.center.platform.monitoring.interfaces.rest.resources.SensorResource;
+import pe.upc.cleanview.backend.monitoring.domain.model.aggregates.Sensor;
+import pe.upc.cleanview.backend.monitoring.domain.model.entities.Waste;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.SensorResource;
 
 import java.util.stream.Collectors;
 
