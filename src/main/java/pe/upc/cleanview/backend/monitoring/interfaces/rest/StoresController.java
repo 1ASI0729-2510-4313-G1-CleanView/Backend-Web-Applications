@@ -1,14 +1,6 @@
 package pe.upc.cleanview.backend.monitoring.interfaces.rest;
 
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteStoreCommand;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllStoresQuery;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByIdQuery;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByNameQuery;
@@ -20,6 +12,14 @@ import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.UpdateStore
 import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.CreateStoreCommandFromResourceAssembler;
 import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.StoreResourceFromEntityAssembler;
 import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.UpdateStoreCommandFromResourceAssembler;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -69,6 +69,20 @@ public class StoresController {
         var storeResource = StoreResourceFromEntityAssembler.toResourceFromEntity(updateStore);
         return new ResponseEntity<>(storeResource, HttpStatus.OK);
     }
+
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Store")
+    public ResponseEntity<StoreResource> deleteStore(@PathVariable Long id) {
+        var deleteStoreCommand = new DeleteStoreCommand(id);
+        storeCommandService.handle(deleteStoreCommand);
+        return ResponseEntity.ok().build();
+    }
+
+
+
+
+    //Queries
 
 
     @GetMapping

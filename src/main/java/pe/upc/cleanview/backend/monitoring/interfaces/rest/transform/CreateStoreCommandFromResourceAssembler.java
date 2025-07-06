@@ -7,7 +7,6 @@ public class CreateStoreCommandFromResourceAssembler {
 
     public static CreateStoreCommand toCommandFromResource(CreateStoreResource resource) {
         return new CreateStoreCommand(
-                resource.sensorsId(),
                 resource.name(),
                 resource.storeNumber(),
                 resource.amountSensor(),

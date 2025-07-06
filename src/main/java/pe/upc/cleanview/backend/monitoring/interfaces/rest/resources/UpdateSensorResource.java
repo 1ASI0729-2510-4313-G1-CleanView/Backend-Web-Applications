@@ -5,12 +5,11 @@ import java.util.List;
 
 public record UpdateSensorResource(
         Long id,
-        String serialNumber,
         List<Long> wastesId,
+        String serialNumber,
         String location,
-        String status,
         int battery,
-        Date lastModified,
+        Date lastDetection,
         String units,
         String capacity,
         String currentCapacity,

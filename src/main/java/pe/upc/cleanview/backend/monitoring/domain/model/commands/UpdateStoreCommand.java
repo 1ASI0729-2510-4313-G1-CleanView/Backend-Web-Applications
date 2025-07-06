@@ -1,5 +1,6 @@
 package pe.upc.cleanview.backend.monitoring.domain.model.commands;
 
+
 import java.util.List;
 
 public record UpdateStoreCommand(

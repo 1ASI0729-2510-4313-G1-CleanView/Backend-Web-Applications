@@ -9,7 +9,7 @@ public class WasteResourceFromEntityAssembler {
         return new WasteResource(
                 entity.getId(),
                 entity.getName(),
-                entity.getType(),
+                entity.getType().getWasteType(),
                 entity.getAmount()
         );
     }

@@ -1,14 +1,5 @@
 package pe.upc.cleanview.backend.monitoring.interfaces.rest;
 
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteSensorCommand;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllSensorsQuery;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetSensorByIdQuery;
@@ -20,6 +11,14 @@ import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.UpdateSenso
 import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.CreateSensorCommandFromResourceAssembler;
 import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.SensorResourceFromEntityAssembler;
 import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.UpdateSensorCommandFromResourceAssembler;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

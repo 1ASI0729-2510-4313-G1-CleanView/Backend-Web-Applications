@@ -1,5 +1,13 @@
 package pe.upc.cleanview.backend.monitoring.interfaces.rest;
 
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteWasteCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetWasteByIdQuery;
+import pe.upc.cleanview.backend.monitoring.domain.services.WasteCommandService;
+import pe.upc.cleanview.backend.monitoring.domain.services.WasteQueryService;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.CreateWasteResource;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.WasteResource;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.CreateWasteCommandFromResourceAssembler;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.WasteResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -8,13 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetWasteByIdQuery;
-import pe.upc.cleanview.backend.monitoring.domain.services.WasteCommandService;
-import pe.upc.cleanview.backend.monitoring.domain.services.WasteQueryService;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.CreateWasteResource;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.WasteResource;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.CreateWasteCommandFromResourceAssembler;
-import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.WasteResourceFromEntityAssembler;
 
 @RestController
 @RequestMapping(value = "/api/v1/wastes", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,6 +43,14 @@ public class WastesController {
         if (waste.isEmpty()) return ResponseEntity.badRequest().build();
         var wasteResource = WasteResourceFromEntityAssembler.toResourceFromEntity(waste.get());
         return new ResponseEntity<>(wasteResource, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Waste")
+    public ResponseEntity<WasteResource> deleteWaste(@PathVariable Long id) {
+        var deleteWasteCommand = new DeleteWasteCommand(id);
+        wasteCommandService.handle(deleteWasteCommand);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
