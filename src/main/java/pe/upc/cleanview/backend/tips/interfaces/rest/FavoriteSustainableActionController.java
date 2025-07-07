@@ -19,7 +19,7 @@ import pe.upc.cleanview.backend.tips.interfaces.rest.resources.AddFavoriteResour
 import pe.upc.cleanview.backend.tips.interfaces.rest.resources.SustainableActionResource;
 import pe.upc.cleanview.backend.tips.interfaces.rest.transform.AddFavoriteCommandFromResourceAssembler;
 import pe.upc.cleanview.backend.tips.interfaces.rest.transform.SustainableActionResourceFromEntityAssembler;
-import pe.upc.cleanview.backend.iam.interfaces.acl.IamContextFacade; // Usar el ACL
+import pe.upc.cleanview.backend.iam.interfaces.acl.IamContextFacade;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,7 +45,6 @@ public class FavoriteSustainableActionController {
         this.iamContextFacade = iamContextFacade;
     }
 
-    // Método auxiliar para obtener el userId del contexto de seguridad
     private Long getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal() instanceof String) {
@@ -61,7 +60,7 @@ public class FavoriteSustainableActionController {
      */
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Add a sustainable action to favorites")// Solo usuarios autenticados@PreAuthorize("hasRole('PERSON') or hasRole('COMPANY')")    @Operation(summary = "Add a sustainable action to favorites")
+    @Operation(summary = "Add a sustainable action to favorites")
     public ResponseEntity<SustainableActionResource> addFavorite(@RequestBody AddFavoriteResource resource) {
         Long userId = getCurrentUserId();
         var command = AddFavoriteCommandFromResourceAssembler.toCommandFromResource(userId, resource);
@@ -69,7 +68,6 @@ public class FavoriteSustainableActionController {
         if (favorite.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        // Devuelve la acción sostenible que se acaba de añadir a favoritos
         var sustainableActionResource = SustainableActionResourceFromEntityAssembler.toResourceFromEntity(favorite.get().getSustainableAction());
         return new ResponseEntity<>(sustainableActionResource, HttpStatus.CREATED);
     }
@@ -98,7 +96,7 @@ public class FavoriteSustainableActionController {
         Long userId = getCurrentUserId();
         var actions = favoriteQueryService.handle(new GetAllFavoriteActionsByUserIdQuery(userId));
         if (actions.isEmpty()) {
-            return ResponseEntity.ok(List.of()); // Devuelve una lista vacía si no hay favoritos
+            return ResponseEntity.ok(List.of());
         }
         var resources = actions.stream()
                 .map(SustainableActionResourceFromEntityAssembler::toResourceFromEntity)

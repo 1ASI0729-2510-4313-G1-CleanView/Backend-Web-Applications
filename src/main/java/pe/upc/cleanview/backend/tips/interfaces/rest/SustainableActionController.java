@@ -34,12 +34,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/sustainable-actions", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Sustainable Actions", description = "Available Sustainable Actions Endpoints")
-@SecurityRequirement(name = "Bearer Authentication") // Añadir requisito de seguridad a nivel de controlador
+@SecurityRequirement(name = "Bearer Authentication")
 public class SustainableActionController {
 
     private final SustainableActionCommandService sustainableActionCommandService;
     private final SustainableActionQueryService sustainableActionQueryService;
-    private final IamContextFacade iamContextFacade; // ¡¡¡CAMBIO AQUÍ!!! Inyectar IamContextFacade
+    private final IamContextFacade iamContextFacade;
 
     /**
      * Constructs a new SustainableActionController.
@@ -48,10 +48,10 @@ public class SustainableActionController {
      */
     SustainableActionController(SustainableActionCommandService sustainableActionCommandService,
                                 SustainableActionQueryService sustainableActionQueryService,
-                                IamContextFacade iamContextFacade) { // ¡¡¡CAMBIO AQUÍ!!! Añadir IamContextFacade
+                                IamContextFacade iamContextFacade) {
         this.sustainableActionCommandService = sustainableActionCommandService;
         this.sustainableActionQueryService = sustainableActionQueryService;
-        this.iamContextFacade = iamContextFacade; // ¡¡¡CAMBIO AQUÍ!!! Asignar
+        this.iamContextFacade = iamContextFacade;
     }
 
     private Long getCurrentUserId() {
@@ -133,7 +133,7 @@ public class SustainableActionController {
      * @return HTTP 200 if deletion was successfully processed.
      */
     @DeleteMapping("/{id}")
-    @PreAuthorize("isAuthenticated()") // ¡¡¡CAMBIO AQUÍ!!! Proteger este endpoint
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Delete a sustainable action by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Sustainable action deletion processed successfully"),

@@ -7,7 +7,6 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
 import pe.upc.cleanview.backend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
-import pe.upc.cleanview.backend.tips.domain.model.commands.CreateSustainableActionCommand;
 import pe.upc.cleanview.backend.tips.domain.model.valueobjects.SustainableActionType;
 
 import java.util.HashSet;
@@ -15,6 +14,7 @@ import java.util.Set;
 
 /**
  * SustainableAction aggregate root.
+ *
  * @summary
  * Represents a sustainable action that can be managed within the platform.
  * A sustainable action contains a title, a description, a sustainable action type,
@@ -44,7 +44,7 @@ public class SustainableAction extends AuditableAbstractAggregateRoot<Sustainabl
         this.title = Strings.EMPTY;
         this.description = Strings.EMPTY;
         this.sustainableActionType = null;
-        this.creatorUserId = null; // Inicializar a null
+        this.creatorUserId = null;
     }
 
     /**
