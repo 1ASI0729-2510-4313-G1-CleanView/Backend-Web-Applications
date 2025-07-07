@@ -6,6 +6,7 @@ import pe.upc.cleanview.backend.iam.interfaces.rest.resources.RoleResource;
 public class RoleResourceFromEntityAssembler {
 
   public static RoleResource toResourceFromEntity(Role role) {
-    return new RoleResource(role.getId(), role.getStringName());
+
+    return new RoleResource(role.getId(), role.getName().name());
   }
 }

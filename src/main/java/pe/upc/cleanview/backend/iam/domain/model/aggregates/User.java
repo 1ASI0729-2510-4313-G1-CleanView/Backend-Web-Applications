@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pe.upc.cleanview.backend.iam.domain.model.entities.Role;
 import pe.upc.cleanview.backend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
+import pe.upc.cleanview.backend.tips.domain.model.aggregates.Favorite;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -24,41 +25,45 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "users")
 public class User extends AuditableAbstractAggregateRoot<User>implements UserDetails {
 
   @NotBlank
   @Size(max = 50)
-  @Getter
-  @Setter
   @Column(unique = true)
   private String username;
 
   @NotBlank
-  @Getter
-  @Setter
+  @Size(max = 100)
+  @Column(unique = true)
+  private String email; // Campo de email añadido
+
+  @NotBlank
   @Size(max = 120)
   private String password;
 
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinTable(	name = "user_roles",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "role_id"))
-
-  @Getter
-  @Setter
+  @JoinTable(   name = "user_roles",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles;
+
+  @OneToMany(mappedBy = "user")
+  private Set<Favorite> favorites = new HashSet<>();
 
   public User() {
     this.roles = new HashSet<>();
   }
-  public User(String username, String password) {
+
+  public User(String username, String email, String password) { // Constructor con email
     this.username = username;
+    this.email = email;
     this.password = password;
     this.roles = new HashSet<>();
   }
 
-  public User(String username, String password, List<Role> roles) {
-    this(username, password);
+  public User(String username, String email, String password, List<Role> roles) { // Constructor con email y roles
+    this(username, email, password);
     addRoles(roles);
   }
 
@@ -78,8 +83,9 @@ public class User extends AuditableAbstractAggregateRoot<User>implements UserDet
    * @return the user with the added roles
    */
   public User addRoles(List<Role> roles) {
-    var validatedRoleSet = Role.validateRoleSet(roles);
-    this.roles.addAll(validatedRoleSet);
+    // *** ¡CAMBIO CLAVE: ELIMINAR LA LLAMADA A validateRoleSet! ***
+    // var validatedRoleSet = Role.validateRoleSet(roles); // <-- ELIMINAR ESTA LÍNEA
+    this.roles.addAll(roles); // <-- Simplemente añadir todos los roles directamente
     return this;
   }
 

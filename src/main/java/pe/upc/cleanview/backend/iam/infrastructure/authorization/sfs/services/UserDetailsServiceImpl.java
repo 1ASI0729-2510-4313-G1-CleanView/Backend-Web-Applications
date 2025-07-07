@@ -22,15 +22,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
   /**
    * This method is responsible for loading the user details from the database.
-   * @param username The username.
+   * It will now search by email instead of username.
+   * @param email The email. (Still named 'username' due to UserDetailsService contract)
    * @return The UserDetails object.
    * @throws UsernameNotFoundException If the user is not found.
    */
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    var user = userRepository.findByUsername(username)
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    var user = userRepository.findByEmail(email)
             .orElseThrow(
-                    () -> new UsernameNotFoundException("User not found with username: " + username));
+                    () -> new UsernameNotFoundException("User not found with email: " + email));
     return UserDetailsImpl.build(user);
   }
 }

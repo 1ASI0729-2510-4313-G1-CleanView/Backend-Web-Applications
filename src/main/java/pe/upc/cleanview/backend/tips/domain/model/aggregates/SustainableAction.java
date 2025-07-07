@@ -3,11 +3,15 @@ package pe.upc.cleanview.backend.tips.domain.model.aggregates;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
 import pe.upc.cleanview.backend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import pe.upc.cleanview.backend.tips.domain.model.commands.CreateSustainableActionCommand;
 import pe.upc.cleanview.backend.tips.domain.model.valueobjects.SustainableActionType;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * SustainableAction aggregate root.
@@ -28,10 +32,10 @@ public class SustainableAction extends AuditableAbstractAggregateRoot<Sustainabl
     @Enumerated(EnumType.STRING)
     private SustainableActionType sustainableActionType;
 
-    /**
-     * Flag indicating if this sustainable action is marked as favorite.
-     */
-    private boolean favorite;
+    private Long creatorUserId;
+
+    @OneToMany(mappedBy = "sustainableAction")
+    private Set<Favorite> favoritedBy = new HashSet<>();
 
     /**
      * Default constructor for JPA.
@@ -40,33 +44,23 @@ public class SustainableAction extends AuditableAbstractAggregateRoot<Sustainabl
         this.title = Strings.EMPTY;
         this.description = Strings.EMPTY;
         this.sustainableActionType = null;
-        this.favorite = false;
+        this.creatorUserId = null; // Inicializar a null
     }
 
     /**
      * Creates a new sustainable action with the given data.
-     * @param command the command containing the sustainable action information
+     * @param title The title of the action.
+     * @param description The description of the action.
+     * @param type The type of the action (String representation of SustainableActionType).
+     * @param creatorUserId The ID of the user who created this action.
      */
-    public SustainableAction(CreateSustainableActionCommand command) {
-        this.title = command.title();
-        this.description = command.description();
-        this.sustainableActionType = SustainableActionType.fromString(command.type());
-        this.favorite = command.favorite();
+
+    public SustainableAction(String title, String description, String type, Long creatorUserId) {
+        this.title = title;
+        this.description = description;
+        this.sustainableActionType = SustainableActionType.fromString(type);
+        this.creatorUserId = creatorUserId;
     }
 
-    /**
-     * Marks this sustainable action as favorite.
-     * @summary Changes the state of this action to favorite.
-     */
-    public void markAsFavorite() {
-        this.favorite = true;
-    }
 
-    /**
-     * Unmarks this sustainable action as favorite.
-     * @summary Changes the state of this action to not favorite.
-     */
-    public void unmarkAsFavorite() {
-        this.favorite = false;
-    }
 }
