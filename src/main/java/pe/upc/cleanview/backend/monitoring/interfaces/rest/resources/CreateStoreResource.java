@@ -1,7 +1,5 @@
 package pe.upc.cleanview.backend.monitoring.interfaces.rest.resources;
 
-import java.util.List;
-
 public record CreateStoreResource(
         String name,
         int storeNumber,

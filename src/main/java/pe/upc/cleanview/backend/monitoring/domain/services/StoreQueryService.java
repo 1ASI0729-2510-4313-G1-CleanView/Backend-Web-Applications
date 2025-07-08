@@ -1,6 +1,7 @@
 package pe.upc.cleanview.backend.monitoring.domain.services;
 
 import pe.upc.cleanview.backend.monitoring.domain.model.aggregates.Store;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllStoresByUserIdQuery;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllStoresQuery;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByIdQuery;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByNameQuery;

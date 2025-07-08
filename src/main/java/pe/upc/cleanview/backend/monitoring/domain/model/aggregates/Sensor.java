@@ -20,6 +20,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Table(name = "sensors")
 public class Sensor extends AuditableAbstractAggregateRoot<Sensor> {
 
     @Column(nullable = false)
