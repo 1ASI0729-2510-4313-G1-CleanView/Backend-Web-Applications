@@ -1,16 +1,17 @@
-package com.acme.center.platform.monitoring.interfaces.rest;
+package pe.upc.cleanview.backend.monitoring.interfaces.rest;
 
-import com.acme.center.platform.monitoring.domain.model.commands.DeleteSensorCommand;
-import com.acme.center.platform.monitoring.domain.model.queries.GetAllSensorsQuery;
-import com.acme.center.platform.monitoring.domain.model.queries.GetSensorByIdQuery;
-import com.acme.center.platform.monitoring.domain.services.SensorCommandService;
-import com.acme.center.platform.monitoring.domain.services.SensorQueryService;
-import com.acme.center.platform.monitoring.interfaces.rest.resources.CreateSensorResource;
-import com.acme.center.platform.monitoring.interfaces.rest.resources.SensorResource;
-import com.acme.center.platform.monitoring.interfaces.rest.resources.UpdateSensorResource;
-import com.acme.center.platform.monitoring.interfaces.rest.transform.CreateSensorCommandFromResourceAssembler;
-import com.acme.center.platform.monitoring.interfaces.rest.transform.SensorResourceFromEntityAssembler;
-import com.acme.center.platform.monitoring.interfaces.rest.transform.UpdateSensorCommandFromResourceAssembler;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteSensorCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllSensorsQuery;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetSensorByIdQuery;
+import pe.upc.cleanview.backend.monitoring.domain.services.SensorCommandService;
+import pe.upc.cleanview.backend.monitoring.domain.services.SensorQueryService;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.CreateSensorResource;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.SensorResource;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.UpdateSensorResource;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.CreateSensorCommandFromResourceAssembler;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.SensorResourceFromEntityAssembler;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.transform.UpdateSensorCommandFromResourceAssembler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -23,8 +24,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/sensors", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/users/sensors", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Sensors", description = "Available Sensor Endpoints")
+@SecurityRequirement(name = "Bearer Authentication")
 public class SensorsController {
 
     private final SensorCommandService sensorCommandService;

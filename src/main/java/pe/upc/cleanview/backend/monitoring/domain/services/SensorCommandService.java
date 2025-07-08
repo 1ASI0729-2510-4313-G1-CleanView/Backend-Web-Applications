@@ -1,9 +1,9 @@
-package com.acme.center.platform.monitoring.domain.services;
+package pe.upc.cleanview.backend.monitoring.domain.services;
 
-import com.acme.center.platform.monitoring.domain.model.commands.CreateSensorCommand;
-import com.acme.center.platform.monitoring.domain.model.commands.DeleteSensorCommand;
-import com.acme.center.platform.monitoring.domain.model.commands.UpdateSensorCommand;
-import com.acme.center.platform.monitoring.domain.model.aggregates.Sensor;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateSensorCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteSensorCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.UpdateSensorCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.aggregates.Sensor;
 
 import java.util.Optional;
 

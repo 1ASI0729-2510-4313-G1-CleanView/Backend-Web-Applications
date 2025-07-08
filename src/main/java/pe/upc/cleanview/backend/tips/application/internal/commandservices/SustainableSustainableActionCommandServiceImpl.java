@@ -1,6 +1,7 @@
 package pe.upc.cleanview.backend.tips.application.internal.commandservices;
 
 import org.springframework.stereotype.Service;
+import pe.upc.cleanview.backend.iam.interfaces.acl.IamContextFacade; // Asegúrate de importar esto si lo necesitas para otras partes del servicio, como la eliminación.
 import pe.upc.cleanview.backend.tips.domain.model.aggregates.SustainableAction;
 import pe.upc.cleanview.backend.tips.domain.model.commands.CreateSustainableActionCommand;
 import pe.upc.cleanview.backend.tips.domain.model.commands.DeleteSustainableActionCommand;
@@ -14,9 +15,12 @@ import java.util.Optional;
 public class SustainableSustainableActionCommandServiceImpl implements SustainableActionCommandService {
 
     private final SustainableActionRepository actionRepository;
+    private final IamContextFacade iamContextFacade; // Asegúrate de que esté inyectado si lo usas en el método de eliminar.
 
-    SustainableSustainableActionCommandServiceImpl(SustainableActionRepository sustainableActionRepository) {
+    // Constructor actualizado para inyectar IamContextFacade
+    SustainableSustainableActionCommandServiceImpl(SustainableActionRepository sustainableActionRepository, IamContextFacade iamContextFacade) {
         this.actionRepository = sustainableActionRepository;
+        this.iamContextFacade = iamContextFacade;
     }
 
     @Override
@@ -32,6 +36,11 @@ public class SustainableSustainableActionCommandServiceImpl implements Sustainab
             throw new IllegalArgumentException("Type is required");
         }
 
+
+        if (command.creatorUserId() == null) {
+            throw new IllegalArgumentException("Creator User ID is required to create a sustainable action.");
+        }
+
         SustainableActionType actionType;
         try {
             actionType = SustainableActionType.fromString(command.type());
@@ -41,13 +50,12 @@ public class SustainableSustainableActionCommandServiceImpl implements Sustainab
             );
         }
 
+
         var action = new SustainableAction(
-                new CreateSustainableActionCommand(
-                        command.title(),
-                        command.description(),
-                        actionType.name(),
-                        command.favorite()
-                )
+                command.title(),
+                command.description(),
+                actionType.name(),
+                command.creatorUserId() // ¡Aquí se pasa el ID del creador!
         );
 
         actionRepository.save(action);
@@ -56,6 +64,24 @@ public class SustainableSustainableActionCommandServiceImpl implements Sustainab
 
     @Override
     public void handle(DeleteSustainableActionCommand command) {
+        Optional<SustainableAction> actionOptional = actionRepository.findById(command.id());
+        if (actionOptional.isEmpty()) {
+            throw new IllegalArgumentException("Sustainable action with ID " + command.id() + " not found.");
+        }
+
+        SustainableAction actionToDelete = actionOptional.get();
+
+        Long authenticatedUserId = iamContextFacade.getCurrentUserId(); // Obtiene el ID del usuario logueado
+
+        if (authenticatedUserId == null) {
+            throw new IllegalStateException("User is not authenticated. Cannot delete action.");
+        }
+
+        // Verifica si el usuario autenticado es el creador de la acción
+        if (!actionToDelete.getCreatorUserId().equals(authenticatedUserId)) {
+            throw new IllegalStateException("User is not authorized to delete this sustainable action. Only the creator can delete it.");
+        }
+
         actionRepository.deleteById(command.id());
     }
 }

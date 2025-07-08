@@ -1,8 +1,8 @@
-package com.acme.center.platform.monitoring.domain.model.entities;
+package pe.upc.cleanview.backend.monitoring.domain.model.entities;
 
-import com.acme.center.platform.monitoring.domain.model.aggregates.Sensor;
-import com.acme.center.platform.monitoring.domain.model.commands.CreateWasteCommand;
-import com.acme.center.platform.monitoring.domain.model.valueobjects.WasteType;
+import pe.upc.cleanview.backend.monitoring.domain.model.aggregates.Sensor;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateWasteCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.valueobjects.WasteType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -10,6 +10,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
+@Table(name = "wastes")
 public class Waste {
 
     @Id

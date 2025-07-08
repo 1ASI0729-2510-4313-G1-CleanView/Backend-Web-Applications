@@ -1,7 +1,7 @@
-package com.acme.center.platform.monitoring.interfaces.rest.transform;
+package pe.upc.cleanview.backend.monitoring.interfaces.rest.transform;
 
-import com.acme.center.platform.monitoring.domain.model.commands.CreateStoreCommand;
-import com.acme.center.platform.monitoring.interfaces.rest.resources.CreateStoreResource;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateStoreCommand;
+import pe.upc.cleanview.backend.monitoring.interfaces.rest.resources.CreateStoreResource;
 
 public class CreateStoreCommandFromResourceAssembler {
 

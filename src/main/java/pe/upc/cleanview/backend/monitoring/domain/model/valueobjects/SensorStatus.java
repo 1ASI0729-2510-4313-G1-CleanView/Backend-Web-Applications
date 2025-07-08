@@ -1,4 +1,4 @@
-package com.acme.center.platform.monitoring.domain.model.valueobjects;
+package pe.upc.cleanview.backend.monitoring.domain.model.valueobjects;
 
 public enum SensorStatus {
     ACTIVE,

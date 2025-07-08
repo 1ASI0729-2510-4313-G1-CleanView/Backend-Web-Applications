@@ -1,13 +1,13 @@
-package com.acme.center.platform.monitoring.application.internal.commandservices;
+package pe.upc.cleanview.backend.monitoring.application.internal.commandservices;
 
-import com.acme.center.platform.monitoring.domain.model.aggregates.Sensor;
-import com.acme.center.platform.monitoring.domain.model.commands.CreateStoreCommand;
-import com.acme.center.platform.monitoring.domain.model.commands.DeleteStoreCommand;
-import com.acme.center.platform.monitoring.domain.model.commands.UpdateStoreCommand;
-import com.acme.center.platform.monitoring.domain.model.aggregates.Store;
-import com.acme.center.platform.monitoring.domain.services.StoreCommandService;
-import com.acme.center.platform.monitoring.infraestructure.persistence.jpa.repositories.SensorRepository;
-import com.acme.center.platform.monitoring.infraestructure.persistence.jpa.repositories.StoreRepository;
+import pe.upc.cleanview.backend.monitoring.domain.model.aggregates.Sensor;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateStoreCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteStoreCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.UpdateStoreCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.aggregates.Store;
+import pe.upc.cleanview.backend.monitoring.domain.services.StoreCommandService;
+import pe.upc.cleanview.backend.monitoring.infraestructure.persistence.jpa.repositories.SensorRepository;
+import pe.upc.cleanview.backend.monitoring.infraestructure.persistence.jpa.repositories.StoreRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,3 +1,3 @@
-package com.acme.center.platform.monitoring.domain.model.queries;
+package pe.upc.cleanview.backend.monitoring.domain.model.queries;
 
 public record GetStoreByIdQuery(Long id){}

@@ -5,6 +5,6 @@ public record SustainableActionResource(
         String title,
         String description,
         String type,
-        boolean favorite
+        Long creatorUserId
 ) {
 }

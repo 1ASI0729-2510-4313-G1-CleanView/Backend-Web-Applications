@@ -4,13 +4,12 @@ import pe.upc.cleanview.backend.tips.domain.model.commands.CreateSustainableActi
 import pe.upc.cleanview.backend.tips.interfaces.rest.resources.CreateSustainableActionResource;
 
 public class CreateSustainableActionCommandFromResourceAssembler {
-
-    public static CreateSustainableActionCommand toCommandFromResource(CreateSustainableActionResource resource) {
+    public static CreateSustainableActionCommand toCommandFromResource(CreateSustainableActionResource resource, Long creatorUserId) {
         return new CreateSustainableActionCommand(
                 resource.title(),
                 resource.description(),
                 resource.type(),
-                resource.favorite()
+                creatorUserId
         );
     }
 }

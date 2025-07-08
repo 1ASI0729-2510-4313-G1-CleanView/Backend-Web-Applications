@@ -1,10 +1,10 @@
-package com.acme.center.platform.monitoring.application.internal.queryservices;
+package pe.upc.cleanview.backend.monitoring.application.internal.queryservices;
 
-import com.acme.center.platform.monitoring.domain.model.entities.Waste;
-import com.acme.center.platform.monitoring.domain.model.queries.GetAllWasteBySensorIdQuery;
-import com.acme.center.platform.monitoring.domain.model.queries.GetWasteByIdQuery;
-import com.acme.center.platform.monitoring.domain.services.WasteQueryService;
-import com.acme.center.platform.monitoring.infraestructure.persistence.jpa.repositories.WasteRespository;
+import pe.upc.cleanview.backend.monitoring.domain.model.entities.Waste;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllWasteBySensorIdQuery;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetWasteByIdQuery;
+import pe.upc.cleanview.backend.monitoring.domain.services.WasteQueryService;
+import pe.upc.cleanview.backend.monitoring.infraestructure.persistence.jpa.repositories.WasteRespository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

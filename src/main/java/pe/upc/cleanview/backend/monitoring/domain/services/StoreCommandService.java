@@ -1,9 +1,9 @@
-package com.acme.center.platform.monitoring.domain.services;
+package pe.upc.cleanview.backend.monitoring.domain.services;
 
-import com.acme.center.platform.monitoring.domain.model.commands.CreateStoreCommand;
-import com.acme.center.platform.monitoring.domain.model.commands.DeleteStoreCommand;
-import com.acme.center.platform.monitoring.domain.model.commands.UpdateStoreCommand;
-import com.acme.center.platform.monitoring.domain.model.aggregates.Store;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.CreateStoreCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteStoreCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.commands.UpdateStoreCommand;
+import pe.upc.cleanview.backend.monitoring.domain.model.aggregates.Store;
 
 import java.util.Optional;
 

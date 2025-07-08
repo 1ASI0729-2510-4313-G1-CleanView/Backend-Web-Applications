@@ -1,11 +1,12 @@
-package com.acme.center.platform.monitoring.application.internal.queryservices;
+package pe.upc.cleanview.backend.monitoring.application.internal.queryservices;
 
-import com.acme.center.platform.monitoring.domain.model.aggregates.Store;
-import com.acme.center.platform.monitoring.domain.model.queries.GetAllStoresQuery;
-import com.acme.center.platform.monitoring.domain.model.queries.GetStoreByIdQuery;
-import com.acme.center.platform.monitoring.domain.model.queries.GetStoreByNameQuery;
-import com.acme.center.platform.monitoring.domain.services.StoreQueryService;
-import com.acme.center.platform.monitoring.infraestructure.persistence.jpa.repositories.StoreRepository;
+import pe.upc.cleanview.backend.monitoring.domain.model.aggregates.Store;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllStoresByUserIdQuery;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllStoresQuery;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByIdQuery;
+import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetStoreByNameQuery;
+import pe.upc.cleanview.backend.monitoring.domain.services.StoreQueryService;
+import pe.upc.cleanview.backend.monitoring.infraestructure.persistence.jpa.repositories.StoreRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

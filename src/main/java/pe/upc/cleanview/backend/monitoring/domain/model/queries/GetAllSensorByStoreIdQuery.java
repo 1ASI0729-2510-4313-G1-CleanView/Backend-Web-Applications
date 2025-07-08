@@ -1,4 +1,4 @@
-package com.acme.center.platform.monitoring.domain.model.queries;
+package pe.upc.cleanview.backend.monitoring.domain.model.queries;
 
 /*
 * Query to get the sensors by Store id

@@ -1,6 +1,4 @@
-package com.acme.center.platform.monitoring.interfaces.rest.resources;
-
-import java.util.List;
+package pe.upc.cleanview.backend.monitoring.interfaces.rest.resources;
 
 public record CreateStoreResource(
         String name,

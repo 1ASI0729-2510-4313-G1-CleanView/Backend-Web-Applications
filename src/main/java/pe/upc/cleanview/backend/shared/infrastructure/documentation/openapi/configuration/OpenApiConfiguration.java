@@ -28,7 +28,7 @@ public class OpenApiConfiguration {
                         .url("https://github.com/"));
 //*************************iam*************************
         // Add security scheme
-        final String securitySchemeName = "bearerAuth";
+        final String securitySchemeName = "Bearer Authentication";
 
         openApi.addSecurityItem(new SecurityRequirement()
                         .addList(securitySchemeName))
