@@ -25,7 +25,7 @@ public class StoreResourceFromEntityAssembler {
                         .map(Sensor::getId)
                         .toList(),
                 entity.getName(),
-                entity.getStoreNumber(),
+                entity.getNumberStore(),
                 entity.getAmountSensor(),
                 entity.getFillPercent(),
                 entity.getColor(),
