@@ -76,7 +76,7 @@ public class WebSecurityConfiguration {
             "http://localhost:59086",
             "http://localhost:60376",
             "http://localhost:59209",
-            "https://backend-web-applications-production-cb75.up.railway.app"
+            "https://backend-web-applications-production-0747.up.railway.app"
     ));
     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
     configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
