@@ -44,7 +44,7 @@ public class OpenApiConfiguration {
                     new Server()
                             .url("https://backend-web-applications-production-cb75.up.railway.app")
                         
-                            .description("Railway Deployment")
+                            .description("Railway DE")
             ));
         }
 
@@ -53,7 +53,7 @@ public class OpenApiConfiguration {
 
     // 🧠 Método auxiliar
     private boolean isProduction() {
-        return "production".equals(System.getenv("SPRING_ENVIRONMENT"));
+        return "production".equals(System.getenv("SPRING_ENV"));
     }
 
 }
