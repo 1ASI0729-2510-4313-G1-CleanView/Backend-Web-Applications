@@ -8,7 +8,6 @@ public record CreateSensorCommand(
          String serialNumber,
          String location,
          int battery,
-         Date lastDetection,
          String units,
          String capacity,
          String currentCapacity,

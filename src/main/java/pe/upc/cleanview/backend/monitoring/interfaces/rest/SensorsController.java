@@ -1,5 +1,6 @@
 package pe.upc.cleanview.backend.monitoring.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteSensorCommand;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetAllSensorsQuery;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetSensorByIdQuery;
@@ -23,8 +24,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/sensors", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/monitoring/sensors", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Sensors", description = "Available Sensor Endpoints")
+@SecurityRequirement(name = "Bearer Authentication")
 public class SensorsController {
 
     private final SensorCommandService sensorCommandService;

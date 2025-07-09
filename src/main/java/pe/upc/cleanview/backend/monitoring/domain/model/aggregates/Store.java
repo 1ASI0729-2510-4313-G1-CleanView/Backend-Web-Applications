@@ -11,10 +11,12 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
+@Table(name = "stores")
 public class Store extends AuditableAbstractAggregateRoot<Store> {
 
     @ManyToMany
@@ -23,7 +25,7 @@ public class Store extends AuditableAbstractAggregateRoot<Store> {
             joinColumns = @JoinColumn(name = "store_id"),
             inverseJoinColumns = @JoinColumn(name = "sensor_id")
     )
-    private List<Sensor> sensorsId;
+    private List<Sensor> sensorsId = new ArrayList<>();
 
     @Column(nullable = false)
     @NotBlank(message = "Cannot be empty")
@@ -31,7 +33,7 @@ public class Store extends AuditableAbstractAggregateRoot<Store> {
 
     @Column(name = "store_number", nullable = false)
     @Min(0)
-    private int storeNumber;
+    private int numberStore;
 
     /*
      * Min of sensor 0
@@ -68,7 +70,7 @@ public class Store extends AuditableAbstractAggregateRoot<Store> {
 
     public Store(CreateStoreCommand command){
         this.name = command.name();
-        this.storeNumber = command.storeNumber();
+        this.numberStore = command.numberStore();
         this.amountSensor = command.amountSensor();
         this.fillPercent = command.fillPercent();
         this.color = command.color();
@@ -77,7 +79,7 @@ public class Store extends AuditableAbstractAggregateRoot<Store> {
 
     public Store Update(UpdateStoreCommand command){
         this.name = command.name();
-        this.storeNumber = command.storeNumber();
+        this.numberStore = command.numberStore();
         this.amountSensor = command.amountSensor();
         this.fillPercent = command.fillPercent();
         this.color = command.color();
@@ -89,9 +91,13 @@ public class Store extends AuditableAbstractAggregateRoot<Store> {
     public Store() {}
 
     public void addSensorToStore(List<Sensor> sensors){
-        this.sensorsId.clear();
-        this.sensorsId = sensors;
-        System.out.println(" -- [ Sensor added to store" + this.sensorsId.stream().map(Sensor::getId).toList());
+        if (this.sensorsId == null) {
+            this.sensorsId = new ArrayList<>();
+        } else {
+            this.sensorsId.clear();
+        }
+        this.sensorsId.addAll(sensors);
+        System.out.println(" -- [ Sensor added to store " + this.sensorsId.stream().map(Sensor::getId).toList());
     }
 
 }

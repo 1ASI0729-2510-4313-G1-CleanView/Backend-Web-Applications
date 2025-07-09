@@ -6,7 +6,7 @@ public record UpdateStoreResource(
         Long id,
         List<Long> sensorsId,
         String name,
-        int storeNumber,
+        int numberStore,
         int amountSensor,
         String fillPercent,
         String color,

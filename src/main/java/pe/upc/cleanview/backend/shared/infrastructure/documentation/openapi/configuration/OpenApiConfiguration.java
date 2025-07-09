@@ -14,26 +14,22 @@ import java.util.List;
 
 @Configuration
 public class OpenApiConfiguration {
+
     @Bean
     public OpenAPI cleanviewBackendOpenApi() {
-        // General configuration
-        var openApi = new OpenAPI();
-        openApi
-                .info(new Info()
+        OpenAPI openApi = new OpenAPI();
+
+        openApi.info(new Info()
                         .title("CleanView Backend API")
                         .description("CleanView backend REST API documentation.")
                         .version("v1.0.0")
-                        .license(new License().name("Apache 2.0")
-                                .url("https://springdoc.org")))
+                        .license(new License().name("Apache 2.0").url("https://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
                         .description("CleanView Backend Documentation")
                         .url("https://github.com/"));
-//*************************iam*************************
-        // Add security scheme
-        final String securitySchemeName = "Bearer Authentication";
 
-        openApi.addSecurityItem(new SecurityRequirement()
-                        .addList(securitySchemeName))
+        final String securitySchemeName = "Bearer Authentication";
+        openApi.addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(new Components()
                         .addSecuritySchemes(securitySchemeName,
                                 new SecurityScheme()
@@ -42,7 +38,7 @@ public class OpenApiConfiguration {
                                         .scheme("bearer")
                                         .bearerFormat("JWT")));
 
-        // ✅ Agrega servers manualmente SOLO en producción
+
         if (isProduction()) {
             openApi.setServers(List.of(
                     new Server()

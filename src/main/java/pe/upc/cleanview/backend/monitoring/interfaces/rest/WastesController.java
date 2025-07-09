@@ -1,5 +1,6 @@
 package pe.upc.cleanview.backend.monitoring.interfaces.rest;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import pe.upc.cleanview.backend.monitoring.domain.model.commands.DeleteWasteCommand;
 import pe.upc.cleanview.backend.monitoring.domain.model.queries.GetWasteByIdQuery;
 import pe.upc.cleanview.backend.monitoring.domain.services.WasteCommandService;
@@ -18,8 +19,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/wastes", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/monitoring/wastes", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Wastes", description = "Available Waste Endpoints")
+@SecurityRequirement(name = "Bearer Authentication")
 public class WastesController {
 
     private final WasteCommandService wasteCommandService;

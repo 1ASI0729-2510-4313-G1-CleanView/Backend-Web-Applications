@@ -10,6 +10,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
+@Table(name = "wastes")
 public class Waste {
 
     @Id
