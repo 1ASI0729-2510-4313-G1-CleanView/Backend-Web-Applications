@@ -9,6 +9,8 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import io.swagger.v3.oas.models.servers.Server;
+import java.util.List;
 
 @Configuration
 public class OpenApiConfiguration {
@@ -40,8 +42,22 @@ public class OpenApiConfiguration {
                                         .scheme("bearer")
                                         .bearerFormat("JWT")));
 
-        // Return OpenAPI configuration object with all the settings
-//*************************iam*************************
+        // ✅ Agrega servers manualmente SOLO en producción
+        if (isProduction()) {
+            openApi.setServers(List.of(
+                    new Server()
+                            .url("https://backend-web-applications-production-0747.up.railway.app")
+
+                            .description("Railway DE")
+            ));
+        }
+
         return openApi;
     }
+
+    // 🧠 Método auxiliar
+    private boolean isProduction() {
+        return "production".equals(System.getenv("SPRING_ENV"));
+    }
+
 }
