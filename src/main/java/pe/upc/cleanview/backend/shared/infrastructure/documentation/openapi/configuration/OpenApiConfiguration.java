@@ -38,12 +38,12 @@ public class OpenApiConfiguration {
                                         .scheme("bearer")
                                         .bearerFormat("JWT")));
 
-        // ✅ Agrega servers manualmente SOLO en producción
+
         if (isProduction()) {
             openApi.setServers(List.of(
                     new Server()
                             .url("https://backend-web-applications-production-0747.up.railway.app")
-                        
+
                             .description("Railway DE")
             ));
         }
