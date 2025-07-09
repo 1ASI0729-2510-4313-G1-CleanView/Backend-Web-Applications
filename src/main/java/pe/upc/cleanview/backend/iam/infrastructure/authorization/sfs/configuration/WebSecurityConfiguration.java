@@ -72,17 +72,16 @@ public class WebSecurityConfiguration {
 
   // 🌐 CORS Filter global
   @Bean
-  public FilterRegistrationBean<CorsFilter> corsFilter() {
-    CorsConfiguration config = new CorsConfiguration();
-    config.setAllowedOrigins(List.of(
-            "http://localhost:8080",
-            "https://backend-web-applications-production-cb75.up.railway.app",
-            "https://backend-web-applications-nhtl.onrender.com"
-    ));
-    config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-    config.setAllowedHeaders(List.of("*"));
-    config.setAllowCredentials(true);
-    config.setMaxAge(3600L);
+
+  public CorsConfigurationSource corsConfigurationSource() {
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:59086", "http://localhost:60376", "http://localhost:59209", "https://backend-web-applications-production-cb75.up.railway.app","https://backend-web-applications-nhtl.onrender.com")); // <-- Ajusta esto si tu frontend usa otros puertos
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
+    configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
+    configuration.setAllowCredentials(true);
+    configuration.setMaxAge(3600L);
+
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", config);
