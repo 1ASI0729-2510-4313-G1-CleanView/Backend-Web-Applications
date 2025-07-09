@@ -53,7 +53,7 @@ public class OpenApiConfiguration {
 
     // 🧠 Método auxiliar
     private boolean isProduction() {
-        return "production".equals(System.getenv("SPRING_ENV"));
+        return "production".equals(System.getenv("SPRING_ENVIRONMENT"));
     }
 
 }
