@@ -76,7 +76,8 @@ public class WebSecurityConfiguration {
     CorsConfiguration config = new CorsConfiguration();
     config.setAllowedOrigins(List.of(
             "http://localhost:8080",
-            "https://backend-web-applications-production-cb75.up.railway.app"
+            "https://backend-web-applications-production-cb75.up.railway.app",
+            "https://backend-web-applications-nhtl.onrender.com"
     ));
     config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     config.setAllowedHeaders(List.of("*"));
