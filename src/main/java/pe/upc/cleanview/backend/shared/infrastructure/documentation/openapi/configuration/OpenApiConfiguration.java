@@ -42,7 +42,7 @@ public class OpenApiConfiguration {
         if (isProduction()) {
             openApi.setServers(List.of(
                     new Server()
-                            .url("https://backend-web-applications-production-cb75.up.railway.app")
+                            .url("https://backend-web-applications-production-0747.up.railway.app")
                         
                             .description("Railway DE")
             ));
