@@ -8,7 +8,6 @@ public record CreateSensorResource(
         String serialNumber,
         String location,
         int battery,
-        Date lastDetection,
         String units,
         String capacity,
         String currentCapacity,
@@ -20,7 +19,6 @@ public record CreateSensorResource(
         if (serialNumber == null || serialNumber.isBlank()) throw new IllegalArgumentException("serialNumber cannot be blank");
         if (location == null || location.isBlank()) throw new IllegalArgumentException("location cannot be blank");
         if (battery < 0) throw new IllegalArgumentException("battery must be non-negative");
-        if (lastDetection == null) throw new IllegalArgumentException("lastModified cannot be null");
         if (units == null || units.isBlank()) throw new IllegalArgumentException("units cannot be blank");
         if (capacity == null || capacity.isBlank()) throw new IllegalArgumentException("capacity cannot be blank");
         if (currentCapacity == null || currentCapacity.isBlank()) throw new IllegalArgumentException("currentCapacity cannot be blank");

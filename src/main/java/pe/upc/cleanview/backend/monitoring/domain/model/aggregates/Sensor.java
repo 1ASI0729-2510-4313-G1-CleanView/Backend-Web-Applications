@@ -24,7 +24,6 @@ import java.util.List;
 public class Sensor extends AuditableAbstractAggregateRoot<Sensor> {
 
     @Column(nullable = false)
-    @Pattern(regexp = "^[a-zA-Z0-9\\-]+$")
     private String serialNumber;
 
     @ManyToMany
@@ -67,7 +66,6 @@ public class Sensor extends AuditableAbstractAggregateRoot<Sensor> {
         this.location = command.location();
         this.status = SensorStatus.ACTIVE;
         this.battery = command.battery();
-        this.lastDetection = command.lastDetection();
         this.units = command.units();
         this.capacity = command.capacity();
         this.currentCapacity = command.currentCapacity();
@@ -101,8 +99,12 @@ public class Sensor extends AuditableAbstractAggregateRoot<Sensor> {
     public Sensor(){}
 
     public void addWastesToSensor(List<Waste>wastes){
-        this.wastesId.clear();
-        this.wastesId = wastes;
+        if (this.wastesId == null) {
+            this.wastesId = new ArrayList<>();
+        } else {
+            this.wastesId.clear();
+        }
+        this.wastesId.addAll(wastes);
         System.out.println(" -- [[ Wastes added : " + wastes.size());
         System.out.println(" -- [[ Wastes added IDs : " + wastes.stream().map(Waste::getId).toList());
     }

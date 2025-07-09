@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/users/stores", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/monitoring/stores", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Stores", description = "Available Stores Endpoints")
 @SecurityRequirement(name = "Bearer Authentication")
 public class StoresController {
