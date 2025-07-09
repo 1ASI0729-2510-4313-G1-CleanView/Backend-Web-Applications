@@ -1,5 +1,6 @@
 package pe.upc.cleanview.backend.iam.infrastructure.authorization.sfs.services;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,6 +12,7 @@ import pe.upc.cleanview.backend.iam.infrastructure.persistence.jpa.repositories.
  * This class is responsible for providing the user details to the Spring Security framework.
  * It implements the UserDetailsService interface.
  */
+@Primary
 @Service(value = "defaultUserDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
