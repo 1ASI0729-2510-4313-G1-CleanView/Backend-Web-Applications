@@ -9,29 +9,50 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import io.swagger.v3.oas.models.servers.Server;
+import java.util.List;
 
 @Configuration
 public class OpenApiConfiguration {
 
     @Bean
     public OpenAPI cleanviewBackendOpenApi() {
-        final String securitySchemeName = "Bearer Authentication";
+        OpenAPI openApi = new OpenAPI();
 
-        return new OpenAPI()
-                .info(new Info()
+        openApi.info(new Info()
                         .title("CleanView Backend API")
                         .description("CleanView backend REST API documentation.")
                         .version("v1.0.0")
                         .license(new License().name("Apache 2.0").url("https://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
                         .description("CleanView Backend Documentation")
-                        .url("https://github.com/"))
-                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
-                .components(new Components().addSecuritySchemes(securitySchemeName,
-                        new SecurityScheme()
-                                .name(securitySchemeName)
-                                .type(SecurityScheme.Type.HTTP)
-                                .scheme("bearer")
-                                .bearerFormat("JWT")));
+                        .url("https://github.com/"));
+
+        final String securitySchemeName = "Bearer Authentication";
+        openApi.addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+                .components(new Components()
+                        .addSecuritySchemes(securitySchemeName,
+                                new SecurityScheme()
+                                        .name(securitySchemeName)
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("bearer")
+                                        .bearerFormat("JWT")));
+
+        // ✅ Agrega servers manualmente SOLO en producción
+        if (isProduction()) {
+            openApi.setServers(List.of(
+                    new Server()
+                            .url("https://backend-web-applications-production-cb75.up.railway.app")
+                            .description("Railway Deployment")
+            ));
+        }
+
+        return openApi;
     }
+
+    // 🧠 Método auxiliar
+    private boolean isProduction() {
+        return "production".equals(System.getenv("SPRING_ENV"));
+    }
+
 }
