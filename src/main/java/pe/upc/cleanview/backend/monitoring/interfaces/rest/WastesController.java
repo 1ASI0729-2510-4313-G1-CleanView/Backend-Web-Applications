@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/users/wastes", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/monitoring/wastes", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Wastes", description = "Available Waste Endpoints")
 @SecurityRequirement(name = "Bearer Authentication")
 public class WastesController {

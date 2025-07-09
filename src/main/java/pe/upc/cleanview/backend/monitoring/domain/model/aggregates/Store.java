@@ -33,7 +33,7 @@ public class Store extends AuditableAbstractAggregateRoot<Store> {
 
     @Column(name = "store_number", nullable = false)
     @Min(0)
-    private int storeNumber;
+    private int numberStore;
 
     /*
      * Min of sensor 0
@@ -70,7 +70,7 @@ public class Store extends AuditableAbstractAggregateRoot<Store> {
 
     public Store(CreateStoreCommand command){
         this.name = command.name();
-        this.storeNumber = command.storeNumber();
+        this.numberStore = command.numberStore();
         this.amountSensor = command.amountSensor();
         this.fillPercent = command.fillPercent();
         this.color = command.color();
@@ -79,7 +79,7 @@ public class Store extends AuditableAbstractAggregateRoot<Store> {
 
     public Store Update(UpdateStoreCommand command){
         this.name = command.name();
-        this.storeNumber = command.storeNumber();
+        this.numberStore = command.numberStore();
         this.amountSensor = command.amountSensor();
         this.fillPercent = command.fillPercent();
         this.color = command.color();

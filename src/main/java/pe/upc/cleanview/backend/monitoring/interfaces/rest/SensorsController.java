@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/users/sensors", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/monitoring/sensors", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Sensors", description = "Available Sensor Endpoints")
 @SecurityRequirement(name = "Bearer Authentication")
 public class SensorsController {

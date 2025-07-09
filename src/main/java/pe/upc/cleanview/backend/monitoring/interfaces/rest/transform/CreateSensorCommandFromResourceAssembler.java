@@ -12,7 +12,6 @@ public class CreateSensorCommandFromResourceAssembler {
                 resource.serialNumber(),
                 resource.location(),
                 resource.battery(),
-                resource.lastDetection(),
                 resource.units(),
                 resource.capacity(),
                 resource.currentCapacity(),

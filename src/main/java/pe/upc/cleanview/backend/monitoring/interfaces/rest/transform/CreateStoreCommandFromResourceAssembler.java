@@ -8,7 +8,7 @@ public class CreateStoreCommandFromResourceAssembler {
     public static CreateStoreCommand toCommandFromResource(CreateStoreResource resource) {
         return new CreateStoreCommand(
                 resource.name(),
-                resource.storeNumber(),
+                resource.numberStore(),
                 resource.amountSensor(),
                 resource.fillPercent(),
                 resource.color(),

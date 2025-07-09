@@ -9,7 +9,7 @@ public class UpdateStoreCommandFromResourceAssembler {
                 id,
                 resource.sensorsId(),
                 resource.name(),
-                resource.storeNumber(),
+                resource.numberStore(),
                 resource.amountSensor(),
                 resource.fillPercent(),
                 resource.color(),
