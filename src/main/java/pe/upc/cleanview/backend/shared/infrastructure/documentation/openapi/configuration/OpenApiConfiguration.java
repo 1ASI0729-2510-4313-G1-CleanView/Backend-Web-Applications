@@ -40,8 +40,10 @@ public class OpenApiConfiguration {
                                         .scheme("bearer")
                                         .bearerFormat("JWT")));
 
+
         // Return OpenAPI configuration object with all the settings
 //*************************iam*************************
+
         return openApi;
     }
 }
