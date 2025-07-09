@@ -88,7 +88,7 @@ public class WebSecurityConfiguration {
   public CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:59086", "http://localhost:60376", "http://localhost:59209")); // <-- Ajusta esto si tu frontend usa otros puertos
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:59086", "http://localhost:60376", "http://localhost:59209",  "https://backend-web-applications-production-cb75.up.railway.app")); // <-- Ajusta esto si tu frontend usa otros puertos
     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
     configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
     configuration.setAllowCredentials(true);
