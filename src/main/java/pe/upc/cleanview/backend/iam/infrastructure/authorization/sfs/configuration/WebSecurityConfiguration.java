@@ -4,8 +4,6 @@ import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -23,7 +21,6 @@ import org.springframework.web.cors.*;
 
 import pe.upc.cleanview.backend.iam.infrastructure.authorization.sfs.pipeline.BearerAuthorizationRequestFilter;
 import pe.upc.cleanview.backend.iam.infrastructure.tokens.jwt.BearerTokenService;
-import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +30,7 @@ import java.util.List;
 @EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration {
 
-  private final UserDetailsService userDetailsService; // ✅ usar interfaz, inyecta @Primary
+  private final UserDetailsService userDetailsService;
   private final BearerTokenService tokenService;
   private final AuthenticationEntryPoint unauthorizedRequestHandler;
 
@@ -60,7 +57,7 @@ public class WebSecurityConfiguration {
   @Bean
   public DaoAuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder) {
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-    provider.setUserDetailsService(userDetailsService); // ✅ usará el que tiene @Primary
+    provider.setUserDetailsService(userDetailsService);
     provider.setPasswordEncoder(passwordEncoder);
     return provider;
   }
@@ -70,32 +67,31 @@ public class WebSecurityConfiguration {
     return config.getAuthenticationManager();
   }
 
-  // 🌐 CORS Filter global
+  // ✅ CORS configuration
   @Bean
-
   public CorsConfigurationSource corsConfigurationSource() {
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration configuration = new CorsConfiguration();
-
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:59086", "http://localhost:60376", "http://localhost:59209", "https://backend-web-applications-production-cb75.up.railway.app")); // <-- Ajusta esto si tu frontend usa otros puertos
-    
+    configuration.setAllowedOrigins(Arrays.asList(
+            "http://localhost:4200",
+            "http://localhost:59086",
+            "http://localhost:60376",
+            "http://localhost:59209",
+            "https://backend-web-applications-production-cb75.up.railway.app"
+    ));
     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
     configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
     configuration.setAllowCredentials(true);
     configuration.setMaxAge(3600L);
 
-
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", config);
-
-    FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-    return bean;
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
   }
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedRequestHandler))
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
