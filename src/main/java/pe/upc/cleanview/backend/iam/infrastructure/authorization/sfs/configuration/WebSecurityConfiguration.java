@@ -5,12 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
@@ -59,17 +61,20 @@ public class WebSecurityConfiguration {
   }
 
   @Bean
-  public DaoAuthenticationProvider authenticationProvider() {
-    var provider = new DaoAuthenticationProvider();
+  public DaoAuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder) {
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
     provider.setUserDetailsService(customUserDetailsService);
-    provider.setPasswordEncoder(hashingService);
+    provider.setPasswordEncoder(passwordEncoder);
     return provider;
   }
 
+
+
   @Bean
   public PasswordEncoder passwordEncoder() {
-    return hashingService;
+    return new BCryptPasswordEncoder();
   }
+
 
   // 🔥 Filtro CORS global con alta prioridad (para Railway y Swagger local)
   @Bean
@@ -90,7 +95,7 @@ public class WebSecurityConfiguration {
   }
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  public SecurityFilterChain filterChain(HttpSecurity http, DaoAuthenticationProvider authenticationProvider) throws Exception {
     http
             .csrf(csrf -> csrf.disable())
             .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedRequestHandler))
@@ -110,9 +115,10 @@ public class WebSecurityConfiguration {
                             "/api/v1/sustainable-actions/**"
                     ).permitAll()
                     .anyRequest().authenticated())
-            .authenticationProvider(authenticationProvider())
+            .authenticationProvider(authenticationProvider) // ✅ ya viene como parámetro
             .addFilterBefore(authorizationRequestFilter(), UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }
+
 }
